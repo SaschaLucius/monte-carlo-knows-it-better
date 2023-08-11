@@ -33,7 +33,7 @@
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/SaschaLucius/interactive-scrum-guide/">
+		<a href="https://github.com/SaschaLucius/monte-carlo-knows-it-better/">
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>

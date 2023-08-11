@@ -5,19 +5,19 @@
 <form class="content">
 	<label>
 		<input type="checkbox" bind:checked={$config.keepHeader} />
-		Keep Header
+		Setting 1
 	</label>
 	<label>
 		<input type="checkbox" bind:checked={$config.fullTextSearch} />
-		Full-text search
+		Setting 2
 	</label>
 	<label>
 		<input type="checkbox" bind:checked={$config.autoTagging} />
-		Auto-Tagging
+		Setting 3
 	</label>
 	<label>
 		<input type="checkbox" bind:checked={$config.tagSearch} />
-		Tag search
+		Setting 4
 	</label>
 </form>
 
