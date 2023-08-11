@@ -18,7 +18,11 @@ const config = {
 						assets: 'build',
 						strict: false
 				  })
-				: autoAdapter()
+				: autoAdapter(),
+		paths: {
+			// base path for GitHub Pages
+			base: TARGET === 'static' ? '/monte-carlo-knows-it-better' : ''
+		}
 	}
 };
 
