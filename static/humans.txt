@@ -1,0 +1,19 @@
+/* TEAM */
+	Developer: Sascha Lucius
+	Contact: tbd
+	Linkedin: https://www.linkedin.com/in/sascha-lucius-0a9537245/
+	GitHub: https://github.com/SaschaLucius
+    From: Halle (Saale), Germany
+
+/* THANKS */
+	Svelte Template: Svelte Community
+
+	Scrum Guide Reordered: Stefan Wolpers
+	Website: https://age-of-product.com/
+	From: Berlin, Germany
+
+/* SITE */
+	Last update:2023
+	Language: English
+	Doctype: HTML5
+	IDE: Visual Studio Code

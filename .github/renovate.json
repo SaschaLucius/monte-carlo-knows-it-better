@@ -1,0 +1,35 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:base", ":pinAllExceptPeerDependencies"],
+	"enabled": true,
+	"prConcurrentLimit": 10,
+	"schedule": ["before 2am every weekday"],
+	"rebaseWhen": "never",
+	"assigneesFromCodeOwners": true,
+	"packageRules": [
+		{
+			"matchDatasources": ["npm"],
+			"stabilityDays": 3
+		},
+		{
+			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+			"automerge": true
+		},
+		{
+			"groupName": "Svelte core",
+			"matchPackagePatterns": ["^@sveltejs"]
+		},
+		{
+			"groupName": "ESLint",
+			"matchPackagePatterns": ["^eslint"]
+		},
+		{
+			"groupName": "Prettier",
+			"matchPackagePatterns": ["^prettier"]
+		},
+		{
+			"groupName": "Svelte Packages",
+			"matchPackagePatterns": ["^svelte-"]
+		}
+	]
+}
