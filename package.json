@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"build:static": "TARGET=static vite build",
+		"build:gh-page": "TARGET=gh-page vite build",
 		"preview": "vite preview",
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -33,7 +33,7 @@
 		"@vitest/coverage-c8": "0.26.3",
 		"eslint": "8.47.0",
 		"eslint-config-prettier": "9.0.0",
-		"eslint-plugin-svelte": "2.32.4",
+		"eslint-plugin-svelte": "^2.32.4",
 		"husky": "8.0.3",
 		"jsdom": "22.1.0",
 		"lint-staged": "13.2.3",

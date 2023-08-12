@@ -12,7 +12,7 @@ const config = {
 
 	kit: {
 		adapter:
-			TARGET === 'static'
+			TARGET === 'gh-page'
 				? staticAdapter({
 						pages: 'build',
 						assets: 'build',
@@ -21,7 +21,7 @@ const config = {
 				: autoAdapter(),
 		paths: {
 			// base path for GitHub Pages
-			base: TARGET === 'static' ? '/monte-carlo-knows-it-better' : ''
+			base: TARGET === 'gh-page' ? process.env.BASE_PATH : ''
 		}
 	}
 };
