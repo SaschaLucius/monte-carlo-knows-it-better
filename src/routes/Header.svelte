@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+	import { base } from '$app/paths';
 
 	var pages = [
 		{ path: '/config', name: 'Configuration' },
@@ -11,7 +12,7 @@
 
 <header>
 	<div class="corner">
-		<a href="/">
+		<a href="{base}/">
 			<img src={logo} alt="Home" />
 		</a>
 	</div>
@@ -23,7 +24,7 @@
 		<ul>
 			{#each pages as p}
 				<li aria-current={$page.url.pathname === '{p.path}' ? 'page' : undefined}>
-					<a href={p.path}>{p.name}</a>
+					<a href="{base}{p.path}">{p.name}</a>
 				</li>
 			{/each}
 		</ul>
