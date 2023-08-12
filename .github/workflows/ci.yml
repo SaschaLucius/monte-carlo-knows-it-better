@@ -27,7 +27,7 @@ jobs:
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
         run: |
-          npm run build:gh-pages
+          npm run build:gh-page
           touch build/.nojekyll
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
