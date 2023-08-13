@@ -5,6 +5,7 @@
 	import ForecastField from '../lib/components/ForecastField.svelte';
 	import ActionCard from '../lib/components/ActionCard.svelte';
 	import Dice from '$lib/components/Dice.svelte';
+	import { config } from '$lib/stores/config';
 
 	let state: {
 		diceAmount: number;
@@ -30,17 +31,17 @@
 			finishedWork: number | undefined;
 		}[];
 	} = {
-		diceAmount: 6,
+		diceAmount: $config.defaultDevelopers,
 		dices: [],
 		diceValues: [],
-		maxRounds: 5,
+		maxRounds: $config.defaultRounds,
 		finishedRounds: 0,
 		rounds: [
 			{
-				remaining: 50,
-				profit: 295,
-				cost: 30,
-				forecast: 7,
+				remaining: $config.baseWork + $config.additionalWork,
+				profit: $config.baseProfit + $config.additionalProfit,
+				cost: $config.defaultDevelopers * $config.developerCostPerRound,
+				forecast: $config.defaultForecast,
 				decision: undefined,
 				event: undefined,
 				finishedWork: undefined

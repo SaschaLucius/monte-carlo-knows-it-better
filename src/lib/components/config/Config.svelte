@@ -4,26 +4,42 @@
 
 <form class="content">
 	<label>
-		<input type="checkbox" bind:checked={$config.keepHeader} />
-		Setting 1
+		<input type="number" bind:value={$config.baseWork} />
+		Basisfunktion Arbeit
 	</label>
 	<label>
-		<input type="checkbox" bind:checked={$config.fullTextSearch} />
-		Setting 2
+		<input type="number" bind:value={$config.baseProfit} />
+		Basisfunktion Gewinn
 	</label>
 	<label>
-		<input type="checkbox" bind:checked={$config.autoTagging} />
-		Setting 3
+		<input type="number" bind:value={$config.additionalWork} />
+		Zusatzfunktion Arbeit
 	</label>
 	<label>
-		<input type="checkbox" bind:checked={$config.tagSearch} />
-		Setting 4
+		<input type="number" bind:value={$config.additionalProfit} />
+		Zusatzfunktion Gewinn
+	</label>
+	<label>
+		<input type="number" bind:value={$config.defaultRounds} />
+		Runden
+	</label>
+	<label>
+		<input type="number" bind:value={$config.defaultForecast} />
+		Forecast
+	</label>
+	<label>
+		<input type="number" bind:value={$config.defaultDevelopers} />
+		Entwickler
+	</label>
+	<label>
+		<input type="number" bind:value={$config.developerCostPerRound} />
+		Entwicklerkosten je Runde
 	</label>
 </form>
 
 <style>
 	input {
-		border: 1px solid #f1f1f1;
+		border: 1px solid rgb(0, 0, 0);
 		background-color: transparent;
 		font-size: 3rem;
 		color: rgba(0, 0, 0, 0.7);
