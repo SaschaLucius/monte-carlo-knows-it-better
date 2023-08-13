@@ -1,9 +1,9 @@
 <script lang="ts">
-	var number: number;
+	var number: number | undefined;
 
 	let sides = 6;
 
-	export function roll() {
+	export function roll(): number {
 		let result = Math.floor(Math.random() * sides) + 1;
 
 		switch (result) {
@@ -25,7 +25,10 @@
 			case 6:
 				number = 3;
 				break;
+			default:
+				number = 0;
 		}
+		return number;
 	}
 </script>
 

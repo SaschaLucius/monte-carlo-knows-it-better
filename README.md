@@ -18,19 +18,6 @@ While learning for [PSM1 Certification](https://www.scrum.org/assessments/profes
 
 ## Sources
 
-### Scrum
-
-- https://www.michaelvizdos.com/interactive-scrum-guide
-- https://scrumguides.org/scrum-guide.html
-- https://age-of-product.com/scrum-guide-reordered/
-- https://www.mateuszzeromski.pl/wp-content/uploads/2021/04/Age-of-Product-com-Scrum-Guide-2020-Reordered-v103.pdf
-- https://github.com/scrumatscale/official-guide
-
-#### Exam Preparation
-
-- https://www.scrum.org/open-assessments/scrum-open
-- https://www.scrum.org/open-assessments/product-owner-open
-
 ### Custom Domain
 
 - https://medium.com/@chflick/how-to-setup-a-github-pages-custom-domain-with-netcup-1da1ef10eb52
@@ -43,6 +30,8 @@ While learning for [PSM1 Certification](https://www.scrum.org/assessments/profes
 - https://svelte.dev/repl/5734f123973d4682978427024ca90850?version=3.29.0
 - https://github.com/pablo-abc/svelte-markdown
 
-### Markdown
+### Websockets and Real Time Data
 
-- https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+- https://youtu.be/o-qnnbMbmE4?t=2956
+- https://www.youtube.com/watch?v=mAcKzdW5fR8&pp=ygUQc3ZlbHRlIHdlYnNvY2tldA%3D%3D
+- https://joyofcode.xyz/using-websockets-with-sveltekit
