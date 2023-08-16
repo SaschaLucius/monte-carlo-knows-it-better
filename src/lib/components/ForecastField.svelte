@@ -1,8 +1,9 @@
 <script lang="ts">
-	export let value: number | undefined = undefined;
+	import { state } from '$lib/stores/state';
+	export let index: number;
 </script>
 
-<input bind:value type="number" id="forecast" name="forecast" />
+<input bind:value={$state.rounds[index].forecast} type="number" id="forecast" name="forecast" />
 
 <style>
 	input {

@@ -1,145 +1,45 @@
 <script lang="ts">
-	import WorkDone from '../lib/components/WorkDone.svelte';
-	import EventCard from '../lib/components/EventCard.svelte';
-	import RemainingWork from '../lib/components/RemainingWork.svelte';
-	import ForecastField from '../lib/components/ForecastField.svelte';
-	import ActionCard from '../lib/components/ActionCard.svelte';
-	import Dice from '$lib/components/Dice.svelte';
 	import { config } from '$lib/stores/config';
+	import { state } from '$lib/stores/state';
+	//import type { State } from '$lib/stores/state';
+	import Forecast from '$lib/components/Forecast.svelte';
+	import WorkDone from '$lib/components/WorkDone.svelte';
+	import EventCard from '$lib/components/EventCard.svelte';
+	import RemainingWork from '$lib/components/RemainingWork.svelte';
+	import ForecastField from '$lib/components/ForecastField.svelte';
+	import ActionCard from '$lib/components/ActionCard.svelte';
+	import Dice from '$lib/components/Dice.svelte';
+	import { onMount } from 'svelte';
 
-	let state: {
-		diceAmount: number;
-		dices: Dice[];
-		diceValues: number[];
-		maxRounds: number;
-		finishedRounds: number;
-		rounds: {
-			remaining: number | undefined;
-			profit: number | undefined;
-			cost: number | undefined;
-			forecast: number | undefined;
-			decision: number | undefined;
-			event:
-				| {
-						rounds: number | undefined;
-						scope: number | undefined;
-						diceValue: number | undefined;
-						dices: number | undefined;
-						cost: number | undefined;
-				  }
-				| undefined;
-			finishedWork: number | undefined;
-		}[];
-	} = {
-		diceAmount: $config.defaultDevelopers,
-		dices: [],
-		diceValues: [],
-		maxRounds: $config.defaultRounds,
-		finishedRounds: 0,
-		rounds: [
-			{
-				remaining: $config.baseWork + $config.additionalWork,
-				profit: $config.baseProfit + $config.additionalProfit,
-				cost: $config.defaultDevelopers * $config.developerCostPerRound,
-				forecast: $config.defaultForecast,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			},
-			{
-				remaining: undefined,
-				profit: undefined,
-				cost: undefined,
-				forecast: undefined,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			},
-			{
-				remaining: undefined,
-				profit: undefined,
-				cost: undefined,
-				forecast: undefined,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			},
-			{
-				remaining: undefined,
-				profit: undefined,
-				cost: undefined,
-				forecast: undefined,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			},
-			{
-				remaining: undefined,
-				profit: undefined,
-				cost: undefined,
-				forecast: undefined,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			},
-			{
-				remaining: undefined,
-				profit: undefined,
-				cost: undefined,
-				forecast: undefined,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			},
-			{
-				remaining: undefined,
-				profit: undefined,
-				cost: undefined,
-				forecast: undefined,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			},
-			{
-				remaining: undefined,
-				profit: undefined,
-				cost: undefined,
-				forecast: undefined,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			},
-			{
-				remaining: undefined,
-				profit: undefined,
-				cost: undefined,
-				forecast: undefined,
-				decision: undefined,
-				event: undefined,
-				finishedWork: undefined
-			}
-		]
-	};
+	import { io } from 'socket.io-client';
+
+	const socket = io();
+	socket.on('stateChanged', (newState) => {
+		$state = newState;
+	});
+	$: {
+		console.log('A');
+		// send message to server if state changes
+		socket.emit('stateChanged', $state);
+	}
+
+	let dices: Dice[] = [];
+
+	onMount(() => {
+		$state.diceAmount = $config.defaultDevelopers;
+		$state.maxRounds = $config.defaultRounds;
+		$state.rounds[0].remaining = $config.baseWork + $config.additionalWork;
+		$state.rounds[0].profit = $config.baseProfit + $config.additionalProfit;
+		$state.rounds[0].cost = $config.defaultDevelopers * $config.developerCostPerRound;
+		// $config.forecastLikelihood;
+		// $config.historicData;
+		// $config.developerCostPerRound;
+	});
 
 	function rollDices() {
-		for (const [index, dice] of state.dices.entries()) {
-			state.diceValues[index] = dice.roll();
+		for (const [index, dice] of dices.entries()) {
+			dice.roll();
 		}
-		console.log(state.diceValues);
-	}
-
-	function updateDices(index: number, event: Event): void {
-		const target = event.target as HTMLSelectElement;
-		state.rounds[index].decision = parseInt(target.value);
-
-		state.diceAmount = 6;
-		state.rounds.forEach(
-			(round) => (state.diceAmount += round.decision !== undefined ? round.decision : 0)
-		);
-	}
-
-	function handleEvent(index: number, event: CustomEvent): void {
-		console.log(index, event.detail); // TODO
 	}
 </script>
 
@@ -153,8 +53,8 @@
 <h2>Game of developers life</h2>
 
 <div class="container">
-	{#each Array(state.diceAmount >= 0 ? state.diceAmount : 0) as _, index (index)}
-		<Dice bind:this={state.dices[index]} />
+	{#each Array($state.diceAmount >= 0 ? $state.diceAmount : 0) as _, index (index)}
+		<Dice {index} bind:this={dices[index]} />
 	{/each}
 </div>
 <button on:click|preventDefault={rollDices}>Würfeln!</button>
@@ -169,21 +69,15 @@
 		<th>Geschaffte Arbeit</th>
 	</tr>
 
-	{#each state.rounds as round, index (index)}
-		{#if index < state.maxRounds}
+	{#each $state.rounds as round, index (index)}
+		{#if index < $state.maxRounds}
 			<tr>
 				<th>Runde {index + 1}</th>
-				<td>
-					<RemainingWork
-						remainingWork={round.remaining}
-						profit={round.profit}
-						cost={round.cost}
-					/></td
-				>
-				<td><ForecastField value={round.forecast} /></td>
-				<td><ActionCard on:change={(e) => updateDices(index, e)} /></td>
-				<td><EventCard {index} on:revealEvent={(e) => handleEvent(index, e)} /></td>
-				<td><WorkDone /> </td>
+				<td><RemainingWork {index} /></td>
+				<td><ForecastField {index} /></td>
+				<td><ActionCard {index} /></td>
+				<td><EventCard {index} /></td>
+				<td><WorkDone {index} /> </td>
 			</tr>
 		{/if}
 	{/each}

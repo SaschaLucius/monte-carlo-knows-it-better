@@ -1,13 +1,9 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-
+	import { state } from '$lib/stores/state';
 	export let index: number;
 
-	const dispatch = createEventDispatcher();
-
-	let text = 'Aufdecken';
-
 	let events: {
+		id: number;
 		text: string;
 		rounds: number | undefined;
 		scope: number | undefined;
@@ -16,6 +12,7 @@
 		cost: number | undefined;
 	}[] = [
 		{
+			id: 1,
 			text: '+2 Runden mehr Zeit',
 			rounds: 2,
 			scope: undefined,
@@ -24,6 +21,7 @@
 			cost: undefined
 		},
 		{
+			id: 2,
 			text: 'Scope Basisfunktion +2',
 			scope: 2,
 			rounds: undefined,
@@ -32,6 +30,7 @@
 			cost: undefined
 		},
 		{
+			id: 3,
 			text: 'Scope Basisfunktion +4',
 			rounds: 4,
 			scope: undefined,
@@ -40,6 +39,7 @@
 			cost: undefined
 		},
 		{
+			id: 4,
 			text: 'Durchsatz +2 für diese Runde',
 			diceValue: 2,
 			rounds: undefined,
@@ -48,6 +48,7 @@
 			cost: undefined
 		},
 		{
+			id: 5,
 			text: '+25k Kosten',
 			cost: 25,
 			rounds: undefined,
@@ -59,12 +60,12 @@
 
 	function reveal() {
 		let result = Math.floor(Math.random() * events.length);
-		text = events[result].text;
-		dispatch('revealEvent', {
-			index: index,
-			event: events[result]
-		});
+		$state.rounds[index].event = events[result];
 	}
 </script>
 
-<button on:click|once={reveal}>{text}</button>
+<button on:click|once={reveal}
+	>{typeof $state.rounds[index].event === 'undefined'
+		? 'Aufdecken!'
+		: $state.rounds[index].event?.text}</button
+>

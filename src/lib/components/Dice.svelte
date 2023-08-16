@@ -1,38 +1,22 @@
 <script lang="ts">
-	var number: number | undefined;
+	import { state } from '$lib/stores/state';
+	import { config } from '$lib/stores/config';
+	export let index: number;
+	let value: number | undefined = undefined;
 
-	let sides = 6;
+	$: values = $config.diceSides
+		.split(',')
+		.filter((x) => x.trim().length)
+		.map(Number);
 
-	export function roll(): number {
-		let result = Math.floor(Math.random() * sides) + 1;
-
-		switch (result) {
-			case 1:
-				number = 0;
-				break;
-			case 2:
-				number = 1;
-				break;
-			case 3:
-				number = 1;
-				break;
-			case 4:
-				number = 2;
-				break;
-			case 5:
-				number = 2;
-				break;
-			case 6:
-				number = 3;
-				break;
-			default:
-				number = 0;
-		}
-		return number;
+	export function roll(): void {
+		let result = Math.floor(Math.random() * values.length) + 1;
+		value = values[result];
+		$state.dices[index] = value;
 	}
 </script>
 
-<p id="placeholder">{number !== undefined ? number : ''}</p>
+<p id="placeholder">{value !== undefined ? value : ''}</p>
 
 <style>
 	* {
