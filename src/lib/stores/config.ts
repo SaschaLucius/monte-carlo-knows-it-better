@@ -14,7 +14,9 @@ interface Config {
 	additionalProfit: number;
 
 	defaultRounds: number;
-	defaultForecast: number;
+	forecastLikelihood: number;
+	historicData: string;
+	diceSides: string;
 	defaultDevelopers: number;
 	developerCostPerRound: number;
 }
@@ -27,7 +29,9 @@ export const config = storage<Config>('config', {
 	additionalProfit: 45,
 
 	defaultRounds: 5,
-	defaultForecast: 7,
+	forecastLikelihood: 85,
+	historicData: '1,3,5,3,7,8,1',
+	diceSides: '0,1,1,2,2,3',
 	defaultDevelopers: 6,
 	developerCostPerRound: 5
 });

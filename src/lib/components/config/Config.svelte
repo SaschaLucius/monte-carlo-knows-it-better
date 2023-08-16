@@ -5,35 +5,43 @@
 <form class="content">
 	<label>
 		<input type="number" bind:value={$config.baseWork} />
-		Basisfunktion Arbeit
+		Basisfunktion: Aufwand
 	</label>
 	<label>
 		<input type="number" bind:value={$config.baseProfit} />
-		Basisfunktion Gewinn
+		Basisfunktion: Gewinn
 	</label>
 	<label>
 		<input type="number" bind:value={$config.additionalWork} />
-		Zusatzfunktion Arbeit
+		Zusatzfunktion: Aufwand
 	</label>
 	<label>
 		<input type="number" bind:value={$config.additionalProfit} />
-		Zusatzfunktion Gewinn
+		Zusatzfunktion: Gewinn
 	</label>
 	<label>
 		<input type="number" bind:value={$config.defaultRounds} />
-		Runden
+		Iterationen: Anzahl
 	</label>
 	<label>
-		<input type="number" bind:value={$config.defaultForecast} />
-		Forecast
+		<input type="number" bind:value={$config.forecastLikelihood} />
+		Bevorzugte Vorhersagewahrscheinlichkeit in Prozent
+	</label>
+	<label>
+		<input type="text" bind:value={$config.historicData} />
+		Historische Daten vorangegangener Iterationen
+	</label>
+	<label>
+		<input type="text" bind:value={$config.diceSides} />
+		Würfel Werte (Entwickler Durchsatz je Iteration)
 	</label>
 	<label>
 		<input type="number" bind:value={$config.defaultDevelopers} />
-		Entwickler
+		Entwickler: Anzahl
 	</label>
 	<label>
 		<input type="number" bind:value={$config.developerCostPerRound} />
-		Entwicklerkosten je Runde
+		Entwickler: Kosten je Iteration
 	</label>
 </form>
 
