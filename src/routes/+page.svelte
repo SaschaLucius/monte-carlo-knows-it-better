@@ -83,6 +83,10 @@
 	{/each}
 </table>
 
+<h2>Forecast</h2>
+
+<Forecast />
+
 <style>
 	.container {
 		display: flex;
