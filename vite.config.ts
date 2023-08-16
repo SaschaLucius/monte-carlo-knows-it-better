@@ -1,8 +1,10 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+import { webSocketServer } from './server/serverLogic';
 
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins: [sveltekit()],
+	plugins: [sveltekit(), webSocketServer],
 	test: {
 		// jest like globals
 		globals: true,
@@ -18,4 +20,4 @@ const config = {
 	}
 };
 
-export default config;
+export default defineConfig(config);

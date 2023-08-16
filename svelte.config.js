@@ -1,8 +1,19 @@
-import autoAdapter from '@sveltejs/adapter-auto';
 import staticAdapter from '@sveltejs/adapter-static';
+import nodeAdapter from '@sveltejs/adapter-node';
+
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
 const TARGET = process.env.TARGET;
+
+function adapter() {
+	return TARGET === 'gh-page'
+		? staticAdapter({
+				pages: 'build',
+				assets: 'build',
+				strict: false
+		  })
+		: nodeAdapter();
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -11,14 +22,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter:
-			TARGET === 'gh-page'
-				? staticAdapter({
-						pages: 'build',
-						assets: 'build',
-						strict: false
-				  })
-				: autoAdapter(),
+		adapter: adapter(),
 		paths: {
 			// base path for GitHub Pages
 			base: TARGET === 'gh-page' ? process.env.BASE_PATH : ''
