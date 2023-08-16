@@ -1,1 +1,0 @@
-import{w as e}from"./index.5d2e1a64.js";const t=(r,o)=>e(o),d=t("config",{baseWork:40,baseProfit:250,additionalWork:10,additionalProfit:45,defaultRounds:5,defaultForecast:7,defaultDevelopers:6,developerCostPerRound:5});export{d as c};
