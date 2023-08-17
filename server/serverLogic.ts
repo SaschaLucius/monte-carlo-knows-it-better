@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { State } from '../src/lib/stores/state';
+
+import { defaultState } from '../src/lib/stores/state';
+
 import { Server, Socket } from 'socket.io';
 import type { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import type { ViteDevServer } from 'vite';
 
-let latestState: State | undefined = undefined;
+let latestState: State = defaultState;
 
-function isEqual(obj1: any, obj2: any): boolean {
+function isEqual(obj1: State, obj2: State): boolean {
 	if (obj1 === obj2) {
 		return true;
 	}
@@ -27,7 +30,7 @@ function isEqual(obj1: any, obj2: any): boolean {
 	return true;
 }
 
-function isObject(object: object): boolean {
+function isObject(object: any): boolean {
 	return object != null && typeof object === 'object';
 }
 
@@ -39,11 +42,12 @@ export function serverLogic(): (
 		socket.on('disconnect', () => {
 			console.log('user disconnected');
 		});
-		socket.on('stateChanged', (msg: State) => {
+		// State Changed by Client
+		socket.on('stateChanged', (msg: State, date: Date) => {
 			console.log('State changed from Client: ', typeof msg);
 			if (!isEqual(latestState, msg)) {
 				latestState = msg;
-				socket.broadcast.emit('stateChanged', msg);
+				socket.broadcast.emit('stateChanged', msg, date);
 			}
 		});
 	};

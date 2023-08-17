@@ -6,34 +6,7 @@ const storage = <T>(key: string, initValue: T): Writable<T> => {
 	return store;
 };
 
-export interface State {
-	diceAmount: number;
-	dices: (number | undefined)[];
-	diceValues: number[];
-	maxRounds: number;
-	finishedRounds: number;
-	rounds: {
-		remaining: number | undefined;
-		profit: number | undefined;
-		cost: number | undefined;
-		forecast: number | undefined;
-		decision: string;
-		event:
-			| {
-					id: number;
-					text: string;
-					rounds: number | undefined;
-					scope: number | undefined;
-					diceValue: number | undefined;
-					dices: number | undefined;
-					cost: number | undefined;
-			  }
-			| undefined;
-		finishedWork: number | undefined;
-	}[];
-}
-
-export const state = storage<State>('state', {
+export const defaultState = {
 	diceAmount: 0,
 	dices: [],
 	diceValues: [],
@@ -122,4 +95,33 @@ export const state = storage<State>('state', {
 			finishedWork: undefined
 		}
 	]
-});
+};
+
+export interface State {
+	diceAmount: number;
+	dices: (number | undefined)[];
+	diceValues: number[];
+	maxRounds: number;
+	finishedRounds: number;
+	rounds: {
+		remaining: number | undefined;
+		profit: number | undefined;
+		cost: number | undefined;
+		forecast: number | undefined;
+		decision: string;
+		event:
+			| {
+					id: number;
+					text: string;
+					rounds: number | undefined;
+					scope: number | undefined;
+					diceValue: number | undefined;
+					dices: number | undefined;
+					cost: number | undefined;
+			  }
+			| undefined;
+		finishedWork: number | undefined;
+	}[];
+}
+
+export const state = storage<State>('state', defaultState);

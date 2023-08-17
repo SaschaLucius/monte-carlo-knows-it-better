@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { config } from '$lib/stores/config';
 	import { state } from '$lib/stores/state';
-	//import type { State } from '$lib/stores/state';
+	import type { State } from '$lib/stores/state';
 	import Forecast from '$lib/components/Forecast.svelte';
 	import WorkDone from '$lib/components/WorkDone.svelte';
 	import EventCard from '$lib/components/EventCard.svelte';
@@ -10,18 +10,15 @@
 	import ActionCard from '$lib/components/ActionCard.svelte';
 	import Dice from '$lib/components/Dice.svelte';
 	import { onMount } from 'svelte';
-
 	import { io } from 'socket.io-client';
 
 	const socket = io();
-	socket.on('stateChanged', (newState) => {
+	socket.on('stateChanged', (newState: State) => {
 		$state = newState;
 	});
-	$: {
-		console.log('A');
-		// send message to server if state changes
-		socket.emit('stateChanged', $state);
-	}
+
+	// send message to server if state changes
+	$: socket.emit('stateChanged', $state, new Date().toISOString());
 
 	let dices: Dice[] = [];
 
@@ -82,8 +79,6 @@
 		{/if}
 	{/each}
 </table>
-
-<h2>Forecast</h2>
 
 <Forecast />
 
