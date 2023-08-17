@@ -1,10 +1,23 @@
 <script lang="ts">
 	import { config } from '$lib/stores/config';
+	import { state } from '$lib/stores/state';
+
 	// Example historical data (daily averages)
-	$: historicalData = $config.historicData
-		.split(',')
-		.filter((x) => x.trim().length)
-		.map(Number);
+
+	let historicalData: number[] = [];
+
+	$: {
+		let hist: number[] = $config.historicData
+			.split(',')
+			.filter((x) => x.trim().length)
+			.map(Number);
+		let finishedWork: number[] = $state.rounds
+			.map((x) => x.finishedWork)
+			.filter((x) => typeof x !== 'undefined')
+			.map(Number);
+
+		historicalData = hist.concat(finishedWork);
+	}
 
 	// Set the scope and the number of simulations
 	$: scope = $config.baseWork + $config.additionalWork;
@@ -50,12 +63,14 @@
 		return results;
 	}
 
-	const likelihoodResults = monteCarloLikelihoodForecast(
-		historicalData,
-		scope,
-		numberOfSimulations
-	);
+	$: likelihoodResults = monteCarloLikelihoodForecast(historicalData, scope, numberOfSimulations);
 </script>
+
+<h2>Forecast</h2>
+
+<p>Historical Data: {historicalData}</p>
+
+<p>Scope left: {scope}</p>
 
 <table border={1}>
 	<tr>
