@@ -17,7 +17,7 @@
 		"coverage": "vitest run --coverage",
 		"prepare": "husky install",
 		"pre-commit": "npx lint-staged",
-		"startServer": "node ./server"
+		"startServer": "node ./src/server"
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "5.0.8",

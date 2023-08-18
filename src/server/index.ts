@@ -2,10 +2,10 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 
-import { handler } from '../build/handler.js';
+import { handler } from '../../build/handler.js';
 import { serverLogic } from './serverLogic.js';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events.js';
-import type { State } from '../src/lib/stores/state';
+import type { State } from '../lib/stores/state.js';
 
 const port: number = 3000;
 const app = express();
