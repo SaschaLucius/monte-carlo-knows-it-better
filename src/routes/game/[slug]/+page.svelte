@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Dices from '$lib/components/Dices.svelte';
 	import { page } from '$app/stores';
 	import { config } from '$lib/stores/config';
 	import { state } from '$lib/stores/state';
@@ -9,7 +10,6 @@
 	import RemainingWork from '$lib/components/RemainingWork.svelte';
 	import ForecastField from '$lib/components/ForecastField.svelte';
 	import ActionCard from '$lib/components/ActionCard.svelte';
-	import Dice from '$lib/components/Dice.svelte';
 	import { onMount } from 'svelte';
 	import { io } from 'socket.io-client';
 
@@ -21,8 +21,6 @@
 	// send message to server if state changes
 	$: socket.emit('stateChanged', $state, new Date().toISOString());
 
-	let dices: Dice[] = [];
-
 	onMount(() => {
 		$state.diceAmount = $config.defaultDevelopers;
 		$state.maxRounds = $config.defaultRounds;
@@ -33,12 +31,6 @@
 		// $config.historicData;
 		// $config.developerCostPerRound;
 	});
-
-	function rollDices() {
-		for (const [index, dice] of dices.entries()) {
-			dice.roll();
-		}
-	}
 </script>
 
 <svelte:head>
@@ -50,13 +42,10 @@
 
 <h2>Game of developers life '{$page.params.slug}'</h2>
 
-<div class="container">
-	{#each Array($state.diceAmount >= 0 ? $state.diceAmount : 0) as _, index (index)}
-		<Dice {index} bind:this={dices[index]} />
-	{/each}
-</div>
-<button on:click|preventDefault={rollDices}>Würfeln!</button>
+<Dices />
+
 <p />
+
 <table border={1}>
 	<tr>
 		<th>Runde</th>
@@ -84,7 +73,4 @@
 <Forecast />
 
 <style>
-	.container {
-		display: flex;
-	}
 </style>

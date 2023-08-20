@@ -1,6 +1,7 @@
 import staticAdapter from '@sveltejs/adapter-static';
 import nodeAdapter from '@sveltejs/adapter-node';
 
+//https://kit.svelte.dev/docs/integrations
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
 const TARGET = process.env.TARGET;
