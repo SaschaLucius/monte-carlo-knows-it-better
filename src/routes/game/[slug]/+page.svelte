@@ -70,7 +70,7 @@
 	{/each}
 </table>
 
-<Forecast />
+<Forecast bind:seed={$page.params.slug} />
 
 <style>
 </style>

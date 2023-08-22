@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { config } from '$lib/stores/config';
 	import { state } from '$lib/stores/state';
+	import { monteCarloLikelihoodForecast } from './forecast';
 
 	// Example historical data (daily averages)
+
+	export let seed: string;
 
 	let historicalData: number[] = [];
 
@@ -20,50 +23,16 @@
 	}
 
 	// Set the scope and the number of simulations
-	$: scope = $config.baseWork + $config.additionalWork;
+	$: scope = $state.rounds[0].remaining;
 
 	const numberOfSimulations: number = 500;
 
-	function monteCarloLikelihoodForecast(
-		historicalData: number[],
-		scope: number,
-		numberOfSimulations: number
-	) {
-		const completionTimes: number[] = [];
-
-		for (let i = 0; i < numberOfSimulations; i++) {
-			let totalItems = 0;
-			let rounds = 1;
-
-			while (totalItems < scope) {
-				const randomIndex = Math.floor(Math.random() * historicalData.length);
-				const dailyAverage = historicalData[randomIndex];
-
-				totalItems += dailyAverage;
-				rounds++;
-			}
-
-			completionTimes.push(rounds);
-		}
-
-		completionTimes.sort((a, b) => a - b);
-
-		const likelihoodSteps = [
-			0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8,
-			0.85, 0.9, 0.95, 0.99
-		];
-		const results: { likelihood: number; completionTime: number }[] = [];
-
-		likelihoodSteps.forEach((likelihood) => {
-			const index = Math.floor(likelihood * numberOfSimulations);
-			const completionTime = completionTimes[index];
-			results.push({ likelihood: likelihood * 100, completionTime });
-		});
-
-		return results;
-	}
-
-	$: likelihoodResults = monteCarloLikelihoodForecast(historicalData, scope, numberOfSimulations);
+	$: likelihoodResults = monteCarloLikelihoodForecast(
+		historicalData,
+		scope,
+		numberOfSimulations,
+		seed
+	);
 </script>
 
 <h2>Forecast</h2>
