@@ -23,7 +23,10 @@
 	}
 
 	// Set the scope and the number of simulations
-	$: scope = $state.rounds[0].remaining;
+	$: scope =
+		$state.rounds[0].remaining === undefined
+			? $config.baseWork + $config.additionalWork
+			: $state.rounds[0].remaining;
 
 	const numberOfSimulations: number = 500;
 
