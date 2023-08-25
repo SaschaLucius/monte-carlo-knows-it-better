@@ -14,12 +14,20 @@
 	import { io } from 'socket.io-client';
 
 	const socket = io();
+	socket.on('connect', () => {
+		console.log('Connection established: ', socket.id);
+	});
+
+	socket.on('disconnect', (reason) => {
+		console.log('Connection closed: ', socket.id, reason);
+	});
+
 	socket.on('stateChanged', (newState: State) => {
 		$state = newState;
 	});
 
 	// send message to server if state changes
-	$: socket.emit('stateChanged', $state, new Date().toISOString());
+	$: if (socket.connected) socket.emit('stateChanged', $state, new Date().toISOString());
 
 	onMount(() => {
 		$state.diceAmount = $config.defaultDevelopers;
