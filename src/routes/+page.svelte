@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	let slug = (Math.random() + 1).toString(36).substring(7);
 </script>
 
@@ -11,7 +12,7 @@
 
 <h2>Game of developers life</h2>
 
-<a href="/game/{slug}">New Game Press here</a>
+<a href="{base}/game/{slug}">New Game Press here</a>
 
 <style>
 </style>
