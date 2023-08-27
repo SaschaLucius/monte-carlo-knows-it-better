@@ -1,12 +1,15 @@
-import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 
-const storage = <T>(key: string, initValue: T): Writable<T> => {
-	const store = writable(initValue);
-	return store;
+const storage = <T>(key: string, initValue: T) => {
+	const { subscribe, set } = writable(initValue);
+	return {
+		subscribe,
+		set: (value: T) => set(value),
+		reset: () => set(initValue)
+	};
 };
 
-export const defaultState = {
+export const DEFAULT_STATE = {
 	diceAmount: 0,
 	dices: [],
 	diceValues: [],
@@ -124,4 +127,4 @@ export interface State {
 	}[];
 }
 
-export const state = storage<State>('state', defaultState);
+export const state = storage<State>('state', DEFAULT_STATE);

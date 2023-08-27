@@ -8,6 +8,7 @@
 		"build": "vite build",
 		"build:gh-page": "TARGET=gh-page vite build",
 		"preview": "vite preview",
+		"preview:gh-page": "npx http-server ./build",
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

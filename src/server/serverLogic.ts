@@ -1,10 +1,10 @@
-import { type State, defaultState } from '../lib/stores/state.js'; // .js extension fixed ERR_MODULE_NOT_FOUND
+import { type State, DEFAULT_STATE } from '../lib/stores/state.js'; // .js extension fixed ERR_MODULE_NOT_FOUND
 import { Server, Socket } from 'socket.io';
 import type { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import type { ViteDevServer } from 'vite';
 import { isEqual } from './util.js'; // .js extension fixed ERR_MODULE_NOT_FOUND
 
-let latestState: State = defaultState;
+let latestState: State = DEFAULT_STATE;
 
 export function serverLogic(): (
 	socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, State>
