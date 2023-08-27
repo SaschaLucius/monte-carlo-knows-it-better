@@ -17,7 +17,7 @@
 		"coverage": "vitest run --coverage",
 		"prepare": "husky install",
 		"pre-commit": "npx lint-staged",
-		"start": "npx ts-node --esm ./src/server/index.ts"
+		"start": "npm run build; npx ts-node --esm ./src/server/index.ts"
 	},
 	"devDependencies": {
 		"@flydotio/dockerfile": "^0.4.8",

@@ -8,7 +8,8 @@ import { serverLogic } from './serverLogic.js';
 import type { DefaultEventsMap } from 'socket.io/dist/typed-events.js';
 import type { State } from '../lib/stores/state.js';
 
-const port: number = 3000;
+console.log('Server Loaded');
+const port = 3000;
 const app = express();
 const server = createServer(app);
 
@@ -22,5 +23,5 @@ io.on('connection', serverLogic());
 app.use(handler);
 
 server.listen(port, () => {
-	console.log(`listening on *:${port}`);
+	console.log(`Server listening on *:${port}`);
 });

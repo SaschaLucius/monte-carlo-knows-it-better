@@ -11,23 +11,7 @@
 	import ForecastField from '$lib/components/ForecastField.svelte';
 	import ActionCard from '$lib/components/ActionCard.svelte';
 	import { onMount } from 'svelte';
-	import { io } from 'socket.io-client';
-
-	const socket = io();
-	socket.on('connect', () => {
-		console.log('Connection established: ', socket.id);
-	});
-
-	socket.on('disconnect', (reason) => {
-		console.log('Connection closed: ', socket.id, reason);
-	});
-
-	socket.on('stateChanged', (newState: State) => {
-		$state = newState;
-	});
-
-	// send message to server if state changes
-	$: if (socket.connected) socket.emit('stateChanged', $state, new Date().toISOString());
+	import { io } from '$lib/socket';
 
 	onMount(() => {
 		$state.diceAmount = $config.defaultDevelopers;
@@ -38,7 +22,36 @@
 		// $config.forecastLikelihood;
 		// $config.historicData;
 		// $config.developerCostPerRound;
+
+		io.connect();
+
+		if (io.connected) {
+			io.on('connect', () => {
+				console.log('Connection established:', io.id);
+			});
+
+			io.on('disconnect', (reason) => {
+				console.log('Connection closed:', io.id, reason);
+			});
+
+			io.on('stateChanged', (newState: State) => {
+				console.log('State Changed:', io.id, newState);
+				$state = newState;
+			});
+		} else {
+			console.log('not connected');
+		}
 	});
+
+	// send message to server if state changes
+	$: {
+		if (io.connected) {
+			console.log('Emit state changed');
+			io.emit('stateChanged', $state, new Date().toISOString());
+		} else {
+			console.log('Socket not connected to emit state change');
+		}
+	}
 </script>
 
 <svelte:head>
