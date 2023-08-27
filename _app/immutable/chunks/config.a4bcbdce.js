@@ -1,0 +1,1 @@
+import{w as e}from"./index.7b43c446.js";const t=(r,o)=>e(o),a=t("config",{baseWork:40,baseProfit:250,additionalWork:10,additionalProfit:45,defaultRounds:5,forecastLikelihood:85,historicData:"1,3,5,3,7,8,1",diceSides:"0,1,1,2,2,3",defaultDevelopers:6,developerCostPerRound:5});export{a as c};
