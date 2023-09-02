@@ -2,20 +2,27 @@ import seedrandom from 'seedrandom';
 
 export function monteCarloLikelihoodForecast(
 	historicalData: number[],
-	scope: number,
+	scope: number | undefined,
 	numberOfSimulations: number,
 	seed: string,
-	focus: number
+	focus: number,
+	highGuess: number | undefined
 ): { likelihood: number; completionTime: number }[] {
 	if (
 		historicalData.length <= 0 ||
 		numberOfSimulations <= 0 ||
+		scope === undefined ||
 		scope < 0 ||
 		focus < 0 ||
 		focus > 100
 	) {
 		return [];
 	}
+
+	if (highGuess === undefined) {
+		highGuess = scope;
+	}
+
 	const rng = seedrandom(seed);
 	const completionTimes: number[] = [];
 
@@ -23,7 +30,9 @@ export function monteCarloLikelihoodForecast(
 		let totalItems = 0;
 		let rounds = 0;
 
-		while (totalItems < scope) {
+		const currentScope = Math.floor(rng() * (highGuess - scope + 1)) + scope;
+
+		while (totalItems < currentScope) {
 			const randomIndex = Math.floor(rng() * historicalData.length);
 			const roundValue = historicalData[randomIndex] * (focus / 100);
 

@@ -25,10 +25,12 @@
 	}
 
 	// Set the scope and the number of simulations
-	$: scope =
-		$state.rounds[0].remaining === undefined
-			? $config.baseWork + $config.additionalWork
-			: $state.rounds[0].remaining;
+	$: scope = $state.rounds
+		.slice()
+		.reverse()
+		.find((arg) => arg?.remaining !== undefined && arg?.remaining !== null)?.remaining;
+
+	$: highGuess = scope;
 
 	const numberOfSimulations: number = 500;
 
@@ -37,7 +39,8 @@
 		scope,
 		numberOfSimulations,
 		seed,
-		focus
+		focus,
+		highGuess
 	);
 </script>
 
@@ -45,12 +48,23 @@
 
 <p>Historical Data: {historicalData}</p>
 
-<p>Scope left: {scope}</p>
+<p>
+	Scope left (low guess): {scope}
 
-<label>
-	<input type="number" bind:value={focus} />
-	Fokus
-</label>
+	<br />
+
+	<label>
+		Scope left (high guess):
+		<input type="number" bind:value={highGuess} />
+	</label>
+
+	<br />
+
+	<label>
+		Fokus:
+		<input type="number" bind:value={focus} />
+	</label>
+</p>
 
 <table border={1}>
 	<tr>
