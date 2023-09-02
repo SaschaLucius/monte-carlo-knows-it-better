@@ -4,9 +4,16 @@ export function monteCarloLikelihoodForecast(
 	historicalData: number[],
 	scope: number,
 	numberOfSimulations: number,
-	seed: string
+	seed: string,
+	focus: number
 ): { likelihood: number; completionTime: number }[] {
-	if (historicalData.length <= 0 || numberOfSimulations <= 0 || scope < 0) {
+	if (
+		historicalData.length <= 0 ||
+		numberOfSimulations <= 0 ||
+		scope < 0 ||
+		focus < 0 ||
+		focus > 100
+	) {
 		return [];
 	}
 	const rng = seedrandom(seed);
@@ -18,7 +25,7 @@ export function monteCarloLikelihoodForecast(
 
 		while (totalItems < scope) {
 			const randomIndex = Math.floor(rng() * historicalData.length);
-			const roundValue = historicalData[randomIndex];
+			const roundValue = historicalData[randomIndex] * (focus / 100);
 
 			totalItems += roundValue;
 			rounds++;

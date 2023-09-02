@@ -7,6 +7,8 @@
 
 	export let seed: string;
 
+	let focus: number = 100;
+
 	let historicalData: number[] = [];
 
 	$: {
@@ -34,7 +36,8 @@
 		historicalData,
 		scope,
 		numberOfSimulations,
-		seed
+		seed,
+		focus
 	);
 </script>
 
@@ -43,6 +46,11 @@
 <p>Historical Data: {historicalData}</p>
 
 <p>Scope left: {scope}</p>
+
+<label>
+	<input type="number" bind:value={focus} />
+	Fokus
+</label>
 
 <table border={1}>
 	<tr>
