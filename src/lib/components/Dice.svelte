@@ -1,8 +1,8 @@
 <script lang="ts">
-	export let value: number | undefined = undefined;
+	export let value: number | null = null;
 </script>
 
-<p id="placeholder">{value !== undefined ? value : ''}</p>
+<p id="placeholder">{value !== null ? value : ''}</p>
 
 <style>
 	* {

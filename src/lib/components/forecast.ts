@@ -2,16 +2,16 @@ import seedrandom from 'seedrandom';
 
 export function monteCarloLikelihoodForecast(
 	historicalData: number[],
-	scope: number | undefined,
+	scope: number | null,
 	numberOfSimulations: number,
 	seed: string,
 	focus: number,
-	highGuess: number | undefined
+	highGuess: number | null
 ): { likelihood: number; completionTime: number }[] {
 	if (
 		historicalData.length <= 0 ||
 		numberOfSimulations <= 0 ||
-		scope === undefined ||
+		scope === null ||
 		scope < 0 ||
 		focus < 0 ||
 		focus > 100
@@ -19,7 +19,7 @@ export function monteCarloLikelihoodForecast(
 		return [];
 	}
 
-	if (highGuess === undefined) {
+	if (highGuess === null) {
 		highGuess = scope;
 	}
 

@@ -17,113 +17,111 @@ export const DEFAULT_STATE = {
 	finishedRounds: 0,
 	rounds: [
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		},
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		},
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		},
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		},
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		},
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		},
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		},
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		},
 		{
-			remaining: undefined,
-			profit: undefined,
-			cost: undefined,
-			forecast: undefined,
+			remaining: null,
+			profit: null,
+			cost: null,
+			forecast: null,
 			decision: '0',
-			event: undefined,
-			finishedWork: undefined
+			event: null,
+			finishedWork: null
 		}
 	]
 };
 
 export interface State {
 	diceAmount: number;
-	dices: (number | undefined)[];
+	dices: (number | null)[];
 	diceValues: number[];
 	maxRounds: number;
 	finishedRounds: number;
 	rounds: {
-		remaining: number | undefined;
-		profit: number | undefined;
-		cost: number | undefined;
-		forecast: number | undefined;
+		remaining: number | null;
+		profit: number | null;
+		cost: number | null;
+		forecast: number | null;
 		decision: string;
-		event:
-			| {
-					id: number;
-					text: string;
-					rounds: number | undefined;
-					scope: number | undefined;
-					diceValue: number | undefined;
-					dices: number | undefined;
-					cost: number | undefined;
-			  }
-			| undefined;
-		finishedWork: number | undefined;
+		event: {
+			id: number;
+			text: string;
+			rounds: number | null;
+			scope: number | null;
+			diceValue: number | null;
+			dices: number | null;
+			cost: number | null;
+		} | null;
+		finishedWork: number | null;
 	}[];
 }
 

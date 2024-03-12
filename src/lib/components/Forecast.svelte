@@ -18,7 +18,7 @@
 			.map(Number);
 		let finishedWork: number[] = $state.rounds
 			.map((x) => x.finishedWork)
-			.filter((x) => typeof x !== 'undefined')
+			.filter((x) => x !== null)
 			.map(Number);
 
 		historicalData = hist.concat(finishedWork);
@@ -28,7 +28,7 @@
 	$: scope = $state.rounds
 		.slice()
 		.reverse()
-		.find((arg) => arg?.remaining !== undefined && arg?.remaining !== null)?.remaining;
+		.find((arg) => arg?.remaining !== null && arg?.remaining !== null)?.remaining;
 
 	$: highGuess = scope;
 

@@ -5,15 +5,11 @@ const defaultIterations = 20000;
 
 describe('MonteCarloLikelihoodForecast', () => {
 	test('empty', () => {
-		expect(monteCarloLikelihoodForecast([], 20, defaultIterations, 'test', 100, undefined)).toEqual(
-			[]
-		);
+		expect(monteCarloLikelihoodForecast([], 20, defaultIterations, 'test', 100, null)).toEqual([]);
 	});
 
 	test('one', () => {
-		expect(
-			monteCarloLikelihoodForecast([1], 20, defaultIterations, 'test', 100, undefined)
-		).toEqual(
+		expect(monteCarloLikelihoodForecast([1], 20, defaultIterations, 'test', 100, null)).toEqual(
 			expect.arrayContaining([
 				{
 					completionTime: 20,
@@ -24,9 +20,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 	});
 
 	test('two', () => {
-		expect(
-			monteCarloLikelihoodForecast([2], 20, defaultIterations, 'test', 100, undefined)
-		).toEqual(
+		expect(monteCarloLikelihoodForecast([2], 20, defaultIterations, 'test', 100, null)).toEqual(
 			expect.arrayContaining([
 				{
 					completionTime: 10,
@@ -37,9 +31,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 	});
 
 	test('one one', () => {
-		expect(
-			monteCarloLikelihoodForecast([1, 1], 20, defaultIterations, 'test', 100, undefined)
-		).toEqual(
+		expect(monteCarloLikelihoodForecast([1, 1], 20, defaultIterations, 'test', 100, null)).toEqual(
 			expect.arrayContaining([
 				{
 					completionTime: 20,
@@ -50,9 +42,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 	});
 
 	test('two two', () => {
-		expect(
-			monteCarloLikelihoodForecast([2, 2], 20, defaultIterations, 'test', 100, undefined)
-		).toEqual(
+		expect(monteCarloLikelihoodForecast([2, 2], 20, defaultIterations, 'test', 100, null)).toEqual(
 			expect.arrayContaining([
 				{
 					completionTime: 10,
@@ -82,9 +72,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 	});
 
 	test('two two 50%', () => {
-		expect(
-			monteCarloLikelihoodForecast([2, 2], 20, defaultIterations, 'test', 50, undefined)
-		).toEqual(
+		expect(monteCarloLikelihoodForecast([2, 2], 20, defaultIterations, 'test', 50, null)).toEqual(
 			expect.arrayContaining([
 				{
 					completionTime: 20,
@@ -95,9 +83,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 	});
 
 	test('one two', () => {
-		expect(
-			monteCarloLikelihoodForecast([1, 2], 20, defaultIterations, 'test', 100, undefined)
-		).toEqual(
+		expect(monteCarloLikelihoodForecast([1, 2], 20, defaultIterations, 'test', 100, null)).toEqual(
 			expect.arrayContaining([
 				{
 					completionTime: 12,
@@ -144,7 +130,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 
 	test('one two three', () => {
 		expect(
-			monteCarloLikelihoodForecast([1, 2, 3], 20, defaultIterations, 'test', 100, undefined)
+			monteCarloLikelihoodForecast([1, 2, 3], 20, defaultIterations, 'test', 100, null)
 		).toEqual(
 			expect.arrayContaining([
 				{
@@ -165,7 +151,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 
 	test('one two three four', () => {
 		expect(
-			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 100, undefined)
+			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 100, null)
 		).toEqual(
 			expect.arrayContaining([
 				{
@@ -186,7 +172,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 
 	test('one two three four 75%', () => {
 		expect(
-			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 75, undefined)
+			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 75, null)
 		).toEqual(
 			expect.arrayContaining([
 				{
@@ -207,7 +193,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 
 	test('one two three four 50%', () => {
 		expect(
-			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 50, undefined)
+			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 50, null)
 		).toEqual(
 			expect.arrayContaining([
 				{
@@ -228,7 +214,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 
 	test('one two three four 25%', () => {
 		expect(
-			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 25, undefined)
+			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 25, null)
 		).toEqual(
 			expect.arrayContaining([
 				{
@@ -249,7 +235,7 @@ describe('MonteCarloLikelihoodForecast', () => {
 
 	test('one two three four 5%', () => {
 		expect(
-			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 5, undefined)
+			monteCarloLikelihoodForecast([1, 2, 3, 4], 20, defaultIterations, 'test', 5, null)
 		).toEqual(
 			expect.arrayContaining([
 				{

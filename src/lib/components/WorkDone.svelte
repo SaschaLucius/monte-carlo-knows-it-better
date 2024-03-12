@@ -5,7 +5,7 @@
 	function handleDelete(e: Event) {
 		const target = e.target as HTMLSelectElement;
 		if (target.value === '') {
-			$state.rounds[index].finishedWork = undefined;
+			$state.rounds[index].finishedWork = null;
 		}
 	}
 </script>
